@@ -29,8 +29,9 @@ print(a, b)
 _aaa = "ad"
 # class = "class"
 한국어_변수 = 10
-韓 = 123
-あ = 456
+韓 = 123 # 한자
+あ = 456 # 히라나나(일본어)
+א = 789 # 히브리어
 
 student_name = "이름" # snake
 studentName = "이름"  # camel
