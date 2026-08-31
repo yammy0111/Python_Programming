@@ -16,13 +16,13 @@ print(z.real,z.imag)
 print(len(a))                       # 문자열의 길이
 print(len([1, 2, 3]))               # 리스트의 길이(요소의 개수)
 
-# # 대소문자를 변환해주는 문자열 메소드
+# 대소문자를 변환해주는 문자열 메소드
 print(a.upper())                    # 대문자로 변환
 print(a.lower())                    # 소문자로 변환
 print(a.capitalize())               # 문자열의 첫 글자만 대문자로 변환
 print(a.title())                    # 각 단어의 첫 글자만 대문자로 변환
 
-# # 문자열의 공백문자 or 특정문자를 제거하는 문자열 메소드
+# 문자열의 공백문자 or 특정문자를 제거하는 문자열 메소드
 a = "\t  python  \n"
 print("["+a+"]")
 print(f"[{a.lstrip()}]")       # 왼쪽 공백문자 제거
@@ -37,7 +37,7 @@ print(a.strip("*"))                 # 양쪽 특정문자 제거
 
 s = "Python is fun. I love Python."
 
-# # 부분 문자열이 처음 등장하는 위치(인덱스)를 알려주는 문자열 메소드
+# 부분 문자열이 처음 등장하는 위치(인덱스)를 알려주는 문자열 메소드
 print(s.find("Python"))             # 인덱스 반환
 print(s.index("Python"))            # 인덱스 반환  
 
