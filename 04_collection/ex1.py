@@ -10,7 +10,7 @@
 #  1. ( mutable,  변경 가능 )
 #  2. ( iterable, 반복 가능 )
 #  3. ( sequence, 인덱싱, 슬라이싱 가능 )
-#  4. ( 중복 가능 )
+#  4. ( duplicatable, 중복 가능 )
 # ===========================================================
 
 # 리스트 생성
@@ -71,16 +71,31 @@ print(a)
 # ===========================================================
 
 a = [3, 4, 1, 5, 2]
-
+# a = ["a", "b", "c"]
+print(len(a))
+print(sum(a))
+print(max(a))
+print(min(a))
+print(id(a))
+b = sorted(a)
+print(b)
+print(id(b))
+c = sorted(a,reverse=True)
+print(c)
 
 # 리스트 합치기
-
+print(a + [10,20])
 
 # "+" 연산은 문자열과 동일하게 새로운 리스트 객체를 만듦
 # 원본을 바꾸려면 리스트 메소드 사용하기
+a.append([10, 20]) # type: ignore
+print(a)
 
-
+a.extend([30, 40])
+print(a)
 # 리스트 반복하기
-
+print(a*2)
 
 # 멤버십 연산자
+print(1 in a)
+print(100 in a)

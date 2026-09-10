@@ -6,50 +6,60 @@
 
 langs = ["c", "c++", "java", "python"]
 
-#                   # 끝에 추가
-# print(langs)
+langs.append("go")                   # 끝에 추가
+print(langs)
 
-#                # 인덱스 2에 "c#" 추가
-# print(langs)
+langs.insert(2,"c#")                 # 인덱스 2에 "c#" 추가
+print(langs)
 
-#              # 인덱스 3을 "javascript"로 변경
-# print(langs)
+langs[3] = "javascript"              # 인덱스 3을 "javascript"로 변경
+print(langs)
 
-#                  # "c++" 삭제 (첫번째 데이터만 삭제)
-# print(langs)
+langs.remove("c++")                  # "c++" 삭제 (첫번째 데이터만 삭제)
+print(langs)
 
-#                         # 인덱스 1 삭제
-# print(langs)
+langs.pop(1)                        # 인덱스 1 삭제
+print(langs)
 
-#                          # 인덱스 생략 시 마지막 항목 삭제
-# print(langs)
+langs.pop()                         # 인덱스 생략 시 마지막 항목 삭제
+print(langs)
 
-# print()        # "python" 인덱스 찾기
+print(langs.index("python"))        # "python" 인덱스 찾기
 
-#                      # 리스트 순서를 거꾸로 뒤집기
-# print(langs)
+langs.reverse()                     # 리스트 순서를 거꾸로 뒤집기
+print(langs)
 
-#                         # 오름차순 정렬
-# print(langs)
+langs.sort()                        # 오름차순 정렬
+print(langs)
 
-#             # 내림차순 정렬
-# print(langs)
+langs.sort(reverse=True)            # 내림차순 정렬
+print(langs)
 
-#                        # 모든 item 삭제
-# print(langs)
+langs.clear()                       # 모든 item 삭제
+print(langs)
 
 # 리스트 복사
 ori = [1, 2, 3]
 
-
+result = ori.copy()
+result.append(10)
+print(ori, result)
 
 # 얕은 복사(shallow copy) vs 깊은 복사(deep copy)
 ori = [[1, 2], [3, 4]]
 
+result2 = ori.copy()
+result2[0].append(10)
 
+print(ori, result2)
 
 # 깊은 복사를 하려면?
+import copy
 
+result2 = copy.deepcopy(ori)
+result2[0].append(10)
+
+print(ori, result2)
 
 
 # ===========================================================
@@ -59,21 +69,47 @@ ori = [[1, 2], [3, 4]]
 # 중첩리스트
 nested_list = [1, ["a", ["x", "y"], "b"], 2]
 
-# print(nested_list)         # x 출력하기
-# print(nested_list)            # b 출력하기
-# print(nested_list)               # 2 출력하기
+print(nested_list[1][1][0])         # x 출력하기
+print(nested_list[1][2])            # b 출력하기
+print(nested_list[2])               # 2 출력하기
 
 # 리스트 언패킹
+nums = [1,2,3,4]
 
+print(*nums)
 
+a, b, c, d = nums
+print(a, b, c, d)
+
+a, *b ,c = nums
+print(a, b ,c)
+
+nums2 = [5, 6]
+print(nums + nums2)
+
+print([*nums,*nums2])
 
 # zip함수: 반복 가능(iterable)한 여러 객체를 인자로 받아
 # 동일한 인덱스에 있는 원소들끼리 튜플로 묶어주는 파이썬 내장 함수
-subjects = ["국어", "수학", "영어"]
+subjects = ["국어", "수학", "영어", "과핫"]
 scores = [80, 90, 95]
 
+a, b, c = zip(subjects,scores)
+print(a, b, c)
 
+for subject, score in zip(subjects, scores):
+    print(f"{subject}: {score}점")
 
+print(map(list,zip(subjects,scores)))
+
+# [x] : x자체를 원소 하나로 해서 넣음
+print([zip(subjects, scores)])
+
+# list(x) : x를 순회해서 리스트에 넣음
+print(list(zip(subjects, scores)))
+
+print(["Python"])
+print(list("Python"))
 
 # ===========================================================
 #  List Comprehension
@@ -81,22 +117,31 @@ scores = [80, 90, 95]
 # ===========================================================
 
 # 1 ~ 10의 제곱수 리스트 만들기
+a = []
+for i in range(1,11):
+    a.append(i**2)
+print(a)
 
+print([x ** 2 for x in range(1,11)])
 
 # 1 ~ 10 중 짝수의 제곱수로 된 리스트 만들기 (필터링 if문 추가)
-
+print([x ** 2 for x in range(1,11) if not x % 2])
 
 # 1 ~ 10 중 짝수면 "짝", 홀수면 "홀" 출력하기
-
+print(["짝" if not x % 2 else "홀" for x in range(1,11)])
 
 # 각 이름의 길이로 이루어진 리스트 만들기
-
+names = ["pororo", "crong", "poby", "eddy"]
+print([len(i) for i in names])
 
 # 길이가 5 이상인 이름만 뽑기
-
+print([i for i in names if len(i) >= 5])
 
 # 중첩 for문도 가능
-
+#  x = 0 1 2
+#  y = 0 1 2
+#  x * y로 이루어진 리스트
+print([x * y for x in range(3) for y in range(3)])
 
 
 # =========================================================
@@ -104,35 +149,42 @@ scores = [80, 90, 95]
 # =========================================================
 
 # 1️⃣ 60점 이상인 점수만 뽑기
-# scores = [85, 42, 73, 55, 90, 68, 35, 100]
+scores = [85, 42, 73, 55, 90, 68, 35, 100]
 
-# result = []
-# print(result)                       # ✅ [85, 73, 90, 68, 100] 출력
+result = [i for i in scores if i >= 60]
+print(result)                       # ✅ [85, 73, 90, 68, 100] 출력
 
 
 # 2️⃣ 60점 이상인 경우 "합격", 60점 미만은 "불합격"으로 처리
-# result = []
-# print(result)                       # ✅ ['합격', '불합격', '합격', '불합격', '합격', '합격', '불합격', '합격']
+result = ["합격" if i >= 60 else "불합격" for i in scores]
+print(result)                       # ✅ ['합격', '불합격', '합격', '불합격', '합격', '합격', '불합격', '합격']
 
 
 # 3️⃣ 1 ~ 100 중 3 또는 5의 배수의 합 구하기 (sum() 함수 이용)
-# result = None
-# print(result)                       # ✅ 2418 출력
+result = [i for i in range(1,101) if not (i%3 and i%5)]
+print(sum(result))                     # ✅ 2418 출력
 
 
 # 4️⃣ n을 포함하고 있는 단어만 뽑기
-# words = ["apple", "banana", "kiwi", "mango"]
+words = ["apple", "banana", "kiwi", "mango"]
 
-# result = []  
-# print(result)                       # ✅ ['banana', 'mango'] 출력
+result = [i for i in words if "n" in i]  
+print(result)                       # ✅ ['banana', 'mango'] 출력
 
 
 # 5️⃣ 세 학생의 3과목 점수표에서 과목별 평균 구하기
-# scores = [
-#     [90, 80, 70],       # 학생 1
-#     [100, 90, 80],      # 학생 2
-#     [80, 70, 60],       # 학생 3
-# ]
+scores = [
+    [90, 80, 70],       # 학생 1
+    [100, 90, 80],      # 학생 2
+    [80, 70, 60],       # 학생 3
+]
 
-# result = []
-# print(result)                       # ✅ [90.0, 80.0, 70.0]
+result = [round(sum(score)/len(score),2) for score in zip(*scores)]
+print(result)                       # ✅ [90.0, 80.0, 70.0]
+
+# 은행가 반올림
+# 정확히 절반에서 반올림이 반복될 수록 값이 너무 커짐을 방지
+print(round(0.5))
+print(round(1.5))
+print(round(2.5))
+print(round(3.5))
