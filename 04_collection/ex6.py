@@ -79,6 +79,14 @@ print(fruits)
 
                                     # ✅ {'apple': 3, 'banana': 2, 'cherry': 1}
 
+count = {}
+for word in words:
+    count[word] = count.get(word, 0) + 1
+
+print({word: words.count(word) for word in set(words)})
+
+from collections import Counter
+print(dict(Counter(words)))
 
 # 2️⃣ 60점 이상인 경우 합격 설정하기
 scores = {"국어": 85, "영어": 50, "수학": 95, "과학": 40, "사회": 72}
@@ -101,3 +109,9 @@ incoming = {"지우개": 4, "노트": 7, "볼펜": 12}     # 입고 내역
 change = {x:stock[x]+incoming[x] if x in stock else incoming[x] for x in incoming}
 print({**stock, **change})
                                     # ✅ {'연필': 10, '지우개': 9, '노트': 10, '볼펜': 12}
+
+for item, qty in incoming.items():
+    stock[item] = stock.get(item, 0) +qty
+
+stock.update({item:stock[item] + qty if item in stock else qty for item, qty in incoming.items()})
+stock.update({item:stock.get(item, 0) + qty for item, qty in incoming.items()})
